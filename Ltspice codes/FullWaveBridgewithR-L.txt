@@ -1,0 +1,12 @@
+Single Phase full wave Bridge rectifier with R-L load 
+Vs 1 0 SIN(0V 311V 50HZ 0 0 0) 
+D1 1 2 DMOD 
+D2 4 0 DMOD 
+D3 0 2 DMOD 
+D4 4 1 DMOD 
+R1 2 3 10 
+L1 3 4 20MH IC=0 
+.MODEL DMOD D(IS=2E-20 BV=600V) 
+.TRAN 0.1MS 100MS 
+.PROBE V(1) V(2,4) I(R1) V(1,2) V(0,2) V(4,1) V(4,0)
+.END
