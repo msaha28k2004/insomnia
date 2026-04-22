@@ -1,0 +1,15 @@
+Three phase full wave bridge rectifier 
+Va 1 0 SIN(0V 311V 50HZ 0 0 0) 
+Vb 2 0 SIN(0V 311V 50HZ 0 0 -120DEG) 
+Vc 3 0 SIN(0V 311V 50HZ 0 0 +120DEG) 
+D1 1 4 DMOD 
+D2 5 3 DMOD 
+D3 2 4 DMOD 
+D4 5 1 DMOD 
+D5 3 4 DMOD 
+D6 5 2 DMOD 
+R1 4 5 10 
+.MODEL DMOD D(IS=2E-20 BV=600V) 
+.TRAN 0.1MS 60MS 
+.PROBE V(Va) V(Vb) V(Vc) V(4,5) I(R1) V(1,2) V(2,3) V(3,1) V(1,4) V(1,5) V(2,4) V(2,5) V(3,4) V(3,5) I(Va) I(Vb) I(Vc)
+.END
