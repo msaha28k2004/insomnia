@@ -1,0 +1,9 @@
+Single phase half wave rectifier with inductive load 
+Vs 1 0 SIN(0V 311V 50HZ 0 0 0DEG) 
+R1 2 3 10 
+L1 3 0 20MH IC=0 
+D1 1 2 DMOD 
+.MODEL DMOD D(IS=2E-20 BV=600V) 
+.TRAN 0.1MS 100MS 
+.PROBE V(1) V(2,0) V(1,2) I(R1)
+.END
