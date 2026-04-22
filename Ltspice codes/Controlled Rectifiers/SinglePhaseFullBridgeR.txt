@@ -1,0 +1,33 @@
+•⁠  ⁠Controlled Full Wave Bridge Rectifier (R Load)
+.SUBCKT SCR 1 3 2
+RG 3 4 50
+VX 4 2 0V
+RT 7 2 1
+CT 7 2 10U
+VY 5 2 0V
+D 6 5 DMOD
+.MODEL DMOD D(IS=2E-15 BV=1000V)
+S1 1 6 7 2 SMOD
+.MODEL SMOD VSWITCH(RON=0.001 ROFF=10MEG VON=0.5 VOFF=0)
+F 2 7 POLY(2) VX VY 0 50 11
+.ENDS SCR
+•⁠  ⁠AC Source
+VS 1 0 SIN(0 311V 50HZ)
+•⁠  ⁠Load (R only)
+R 4 0 10
+•⁠  ⁠Bridge SCRs
+XT1 1 3 4 SCR
+XT2 0 5 4 SCR
+XT3 1 6 0 SCR
+XT4 0 7 0 SCR
+
+•⁠  ⁠Gate Pulses (two pairs firing alternately)
+VP1 3 4 PULSE(0 10V 2.5MS 0.1US 0.1US 0.1MS 20MS)
+VP2 5 4 PULSE(0 10V 2.5MS 0.1US 0.1US 0.1MS 20MS)
+
+VP3 6 0 PULSE(0 10V 12.5MS 0.1US 0.1US 0.1MS 20MS)
+VP4 7 0 PULSE(0 10V 12.5MS 0.1US 0.1US 0.1MS 20MS)
+
+.TRAN 0.1MS 80MS
+.PROBE V(1) V(4) I(R)
+.END
